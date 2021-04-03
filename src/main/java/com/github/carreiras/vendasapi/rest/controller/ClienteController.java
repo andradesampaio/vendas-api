@@ -55,7 +55,6 @@ public class ClienteController {
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, NAO_ENCONTRADO));
     }
 
-
     @GetMapping()
     public List<Cliente> clienteFilter(Cliente cliente) {
         ExampleMatcher matcher = ExampleMatcher
@@ -72,5 +71,4 @@ public class ClienteController {
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, NAO_ENCONTRADO));
     }
-
 }

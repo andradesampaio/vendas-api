@@ -19,14 +19,16 @@ public class Cliente {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     @Column(name = "nome", length = 100)
     private String nome;
-
     @Column(name = "cpf", length = 11)
     private String cpf;
-
     @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private Set<Pedido> pedidos;
+
+    public Cliente(Integer id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
 }

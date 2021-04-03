@@ -1,5 +1,6 @@
 package com.github.carreiras.vendasapi.rest.dto;
 
+import com.github.carreiras.vendasapi.validation.NotEmptyList;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,5 +19,7 @@ public class PedidoDto {
 
     @NotNull(message = "Campo TOTAL do pedido é obrigatório.")
     private BigDecimal total;
+
+    @NotEmptyList(message = "Pedido nao pode ser realizado sem itens.")
     private List<ItemPedidoDto> itens;
 }

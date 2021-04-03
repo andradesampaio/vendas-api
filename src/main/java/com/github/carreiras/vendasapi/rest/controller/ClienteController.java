@@ -7,6 +7,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.*;
@@ -25,14 +26,14 @@ public class ClienteController {
 
     @PostMapping()
     @ResponseStatus(CREATED)
-    public Cliente clienteCreate(@RequestBody Cliente cliente) {
+    public Cliente clienteCreate(@RequestBody @Valid Cliente cliente) {
         return clienteRepository.save(cliente);
     }
 
     @PutMapping("{id}")
     @ResponseStatus(NO_CONTENT)
     public void clienteUpdate(@PathVariable Integer id,
-                              @RequestBody Cliente cliente) {
+                              @RequestBody @Valid Cliente cliente) {
         clienteRepository
                 .findById(id)
                 .map(c -> {

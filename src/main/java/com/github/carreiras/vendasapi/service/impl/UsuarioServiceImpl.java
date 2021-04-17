@@ -2,6 +2,7 @@ package com.github.carreiras.vendasapi.service.impl;
 
 import com.github.carreiras.vendasapi.domain.entity.Usuario;
 import com.github.carreiras.vendasapi.domain.repository.UsuarioRepository;
+import com.github.carreiras.vendasapi.exception.SenhaInvalidaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,9 +26,18 @@ public class UsuarioServiceImpl implements UserDetailsService {
         return usuarioRepository.save(usuario);
     }
 
+    public UserDetails autenticar(Usuario usuario) {
+        UserDetails userDetails = loadUserByUsername(usuario.getLogin());
+        boolean senhaOk = encoder.matches(usuario.getSenha(), userDetails.getPassword());
+
+        if (senhaOk)
+            return userDetails;
+
+        throw new SenhaInvalidaException("Senha inválida.");
+    }
+
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-
         Usuario usuario = usuarioRepository.findByLogin(userName)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado na base de dados."));
 

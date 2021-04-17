@@ -25,6 +25,11 @@ public class JwtService {
     @Value("${security.jwt.chaveAssinatura}")
     private String chaveAssinatura;
 
+    /*
+    Executar este main para testar os métodos:
+        - Gerar token (gerarToken) e
+        - Validar Token (tokenValido)
+    */
     public static void main(String[] args) {
         ConfigurableApplicationContext contexto = SpringApplication.run(VendasApiApplication.class);
         JwtService service = contexto.getBean(JwtService.class);

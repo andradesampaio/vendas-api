@@ -1,4 +1,4 @@
-package com.github.carreiras.vendasapi.config;
+package com.github.carreiras.vendasapi.security.config;
 
 import com.github.carreiras.vendasapi.security.jwt.JwtAuthFilter;
 import com.github.carreiras.vendasapi.security.jwt.JwtService;
@@ -51,9 +51,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/pedidos/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/api/produtos/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/usuarios/**").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
                 .anyRequest().authenticated()
-                .and()
+                .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .headers().frameOptions().sameOrigin()
                 .and()
                 .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
     }

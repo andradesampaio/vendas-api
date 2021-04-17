@@ -1,6 +1,13 @@
 # vendas-api
 
-Demo project for Spring Boot - Vendas API.
+Projeto de demonstração.
+
+#### Contém:
+  - JPA
+  - Restfull API
+  - Security
+  - JTW
+  - Swagger
 
 #### Ferramentas utilizadas:
   - Intellij IDEA

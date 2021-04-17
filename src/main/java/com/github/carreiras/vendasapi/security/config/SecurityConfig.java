@@ -1,4 +1,4 @@
-package com.github.carreiras.vendasapi.config;
+package com.github.carreiras.vendasapi.security.config;
 
 import com.github.carreiras.vendasapi.service.impl.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

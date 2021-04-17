@@ -1,5 +1,6 @@
-package com.github.carreiras.vendasapi;
+package com.github.carreiras.vendasapi.security.jwt;
 
+import com.github.carreiras.vendasapi.VendasApiApplication;
 import com.github.carreiras.vendasapi.domain.entity.Usuario;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;

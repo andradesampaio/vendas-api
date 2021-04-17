@@ -1,4 +1,4 @@
-package com.github.carreiras.vendasapi.config;
+package com.github.carreiras.vendasapi.security.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;

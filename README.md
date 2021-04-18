@@ -1,14 +1,3 @@
 # vendas-api
 
-Projeto de demonstração.
-
-#### Contém:
-  - JPA
-  - Restfull API
-  - Security
-  - JTW
-  - Swagger
-
-#### Ferramentas utilizadas:
-  - Intellij IDEA
-  - Java 15
+See the documentation at: http://localhost:8080/swagger-ui.html

@@ -33,7 +33,7 @@ public class PedidoServiceImpl implements PedidoService {
     private final ProdutoRepository produtoRepository;
 
     @Override
-    public Pedido salvar(PedidoDto pedidoDto) {
+    public Pedido save(PedidoDto pedidoDto) {
         Integer idCliente = pedidoDto.getCliente();
         Cliente cliente = clienteRepository
                 .findById(idCliente)
@@ -52,13 +52,13 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public Optional<Pedido> pedidoCompleto(Integer id) {
+    public Optional<Pedido> bringComplete(Integer id) {
         return pedidoRepository.findByIdFetchItens(id);
     }
 
     @Override
     @Transactional
-    public void pedidoStatusUpdate(Integer id, StatusPedido statusPedido) {
+    public void updateStatus(Integer id, StatusPedido statusPedido) {
         pedidoRepository.findById(id)
                 .map(p -> {
                     p.setStatus(statusPedido);

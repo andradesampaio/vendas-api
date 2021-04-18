@@ -22,11 +22,11 @@ public class UsuarioServiceImpl implements UserDetailsService {
     private UsuarioRepository usuarioRepository;
 
     @Transactional
-    public Usuario salvar(Usuario usuario) {
+    public Usuario save(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
 
-    public UserDetails autenticar(Usuario usuario) {
+    public UserDetails authenticate(Usuario usuario) {
         UserDetails userDetails = loadUserByUsername(usuario.getLogin());
         boolean senhaOk = encoder.matches(usuario.getSenha(), userDetails.getPassword());
 

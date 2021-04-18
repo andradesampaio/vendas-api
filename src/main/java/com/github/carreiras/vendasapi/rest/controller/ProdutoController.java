@@ -2,6 +2,10 @@ package com.github.carreiras.vendasapi.rest.controller;
 
 import com.github.carreiras.vendasapi.domain.entity.Produto;
 import com.github.carreiras.vendasapi.domain.repository.ProdutoRepository;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +17,7 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.*;
 
 @RestController
+@Api("Api Produtos")
 @RequestMapping("api/produtos")
 public class ProdutoController {
 
@@ -26,14 +31,24 @@ public class ProdutoController {
 
     @PostMapping()
     @ResponseStatus(CREATED)
-    public Produto produtoCreate(@RequestBody @Valid Produto produto) {
+    @ApiOperation("save - Salva um novo produto")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Produto salvo com sucesso"),
+            @ApiResponse(code = 400, message = "Erro de validação"),
+    })
+    public Produto save(@RequestBody @Valid Produto produto) {
         return produtoRepository.save(produto);
     }
 
     @PutMapping("{id}")
     @ResponseStatus(NO_CONTENT)
-    public void produtoUpdate(@PathVariable Integer id,
-                              @RequestBody @Valid Produto produto) {
+    @ApiOperation("update - Atualizar um produto existente")
+    @ApiResponses({
+            @ApiResponse(code = 204, message = "Produto atualizado com sucesso"),
+            @ApiResponse(code = 400, message = "Erro de validação"),
+    })
+    public void update(@PathVariable Integer id,
+                       @RequestBody @Valid Produto produto) {
         produtoRepository
                 .findById(id)
                 .map(p -> {
@@ -46,7 +61,11 @@ public class ProdutoController {
 
     @DeleteMapping("{id}")
     @ResponseStatus(NO_CONTENT)
-    public void produtoDelete(@PathVariable Integer id) {
+    @ApiOperation("delete - Exclui um produto existente")
+    @ApiResponses({
+            @ApiResponse(code = 204, message = "Produto excluido com sucesso")
+    })
+    public void delete(@PathVariable Integer id) {
         produtoRepository
                 .findById(id)
                 .map(p -> {
@@ -57,17 +76,24 @@ public class ProdutoController {
     }
 
     @GetMapping()
-    public List<Produto> produtoFilter(Produto produto) {
+    @ApiOperation("filter - Filtra produto")
+    @ApiResponse(code = 200, message = "Filtro executado")
+    public List<Produto> filter(Produto produto) {
         ExampleMatcher matcher = ExampleMatcher
                 .matching()
                 .withIgnoreCase()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
-        Example produtoFilter = Example.of(produto, matcher);
-        return produtoRepository.findAll(produtoFilter);
+        Example filter = Example.of(produto, matcher);
+        return produtoRepository.findAll(filter);
     }
 
     @GetMapping("/{id}")
-    public Produto produtoById(@PathVariable Integer id) {
+    @ApiOperation("findById - Obtém detalhes de um produto")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Produto encontrado"),
+            @ApiResponse(code = 404, message = "Produto não encontrado"),
+    })
+    public Produto findById(@PathVariable Integer id) {
         return produtoRepository
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, NAO_ENCONTRADO));

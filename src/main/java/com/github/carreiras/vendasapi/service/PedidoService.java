@@ -8,9 +8,9 @@ import java.util.Optional;
 
 public interface PedidoService {
 
-    Pedido salvar(PedidoDto pedidoDto);
+    Pedido save(PedidoDto pedidoDto);
 
-    Optional<Pedido> pedidoCompleto(Integer id);
+    Optional<Pedido> bringComplete(Integer id);
 
-    void pedidoStatusUpdate(Integer id, StatusPedido statusPedido);
+    void updateStatus(Integer id, StatusPedido statusPedido);
 }

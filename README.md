@@ -1,5 +1,7 @@
 # vendas-api
 
-Start your server as an simple java application  
+## Overview 
 
-You can view the api documentation in swagger-ui by pointing to: http://localhost:8080/swagger-ui.html
+Inicie seu servidor como um aplicativo Java simples
+
+Você pode visualizar a documentação da API no swagger-ui apontando para: http://localhost:8080/swagger-ui.html
